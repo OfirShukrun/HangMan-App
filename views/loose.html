@@ -1,0 +1,12 @@
+<div class="container-fluid fixed text-center" ng-controller="resultController">
+    <div id="main" class="container col-md-11 my-class text-center ">
+        <h1 class="display-3 animated fadeInDown col-md-6">HangMan</h1>
+        <div ng-show="result " class="display-3 animated fadeInDown row align-items-center justify-content-center ">
+            <h3 id="message">
+                Don't brick your guitar! You maybe lost the game but you can have another chance to be a RockStar!
+            </h3>
+        </div>
+        <img id="man" src="/images/loosing man.svg" class="col-md-2 rounded mx-auto d-block">
+        <button class="button" ng-click="newGame()" name="Show Weather " id="Show "><span>Try Again!</span></button>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<main class="container-fluid fixed text-center" ng-controller="gameController">
+    <div id="main" class="container col-md-11 my-class text-center ">
+
+        <div id="hearts" class="row col-md-12">
+            <div class="col-md-1">
+                <span ng-show="heart3" style="font-size:600%;color:red;">&hearts;</span>
+            </div>
+            <div class="col-md-1">
+                <span ng-show="heart2" style="font-size:600%;color:red;">&hearts;</span>
+            </div>
+            <div class="col-md-1">
+                <span ng-show="heart1" style="font-size:600%;color:red;">&hearts;</span>
+            </div>
+
+            <h1 class="display-3 animated fadeInDown col-md-6">HangMan</h1>
+            <div class="col-md-1">
+                <img id="guitar123" ng-show="guitar1" src="/images/guitar icon.svg ">
+            </div>
+            <div class="col-md-1 ">
+                <img id="guitar123" ng-show="guitar2 " src="/images/guitar icon.svg ">
+            </div>
+            <div class="col-md-1 ">
+                <img id="guitar123" ng-show="guitar3 " src="/images/guitar icon.svg ">
+            </div>
+        </div>
+
+        <h2>Rock Bands!</h2>
+        <h3 ng-show="des ">Collect 3 guitars to win the game!</h3>
+        <div ng-show="result " class="row align-items-center justify-content-center ">
+            <h1 class="ml15 col ">
+                <span class="word ">{{result}}</span>
+            </h1>
+        </div>
+        <img id="man" src="/images/man.svg" class="col-md-2 rounded mx-auto d-block">
+        <div class="row ">
+            <div class="col-md-4 animated fadeInLeft ">
+                <h5>Incorrect :<span ng-repeat="letter in incorrectLettersChosen ">
+                               {{letter}}</h5></div>
+                <div class="col-md-4 ">
+                 <h3>  Guesses Left : {{guesses}}</h3>
+                 </div>
+                <div class="col-md-4 animated fadeInRight ">
+                <h5> Correct : <span ng-repeat="letter in correctLettersChosen ">
+                {{letter}}</h5>
+                </div>
+            </div > 
+                <h4>{{displayWord}}</h4>
+                <input type="text "class="hoverable text-center" pattern='[A-Za-z\\s]*' maxlength="1 " name="Guess " ng-model="input.letter " >
+                <button class="hoverable " ng-click="letterChosen()">Check!</button>
+                <p>Please enter one letter!</p>
+        </div>
+    </main>

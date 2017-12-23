@@ -20,7 +20,7 @@ app.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPro
 
 app.controller("gameController", ['$scope', '$timeout', '$location', ($scope, $timeout, $location) => {
 
-    var words = ["Metalica", "Beatles", "Queen", "Radiohead", "Aerosmith", "Scorpions", "Kiss", "Rush", "Eagles", "Oasis"];
+    var words = ["Metalica", "Beatles", "Queen", "Radiohead", "Aerosmith", "Scorpions", "Kiss", "Rush", "Eagles", "Oasis","Yes","Blur","Weezer","Cream","Journey"];
     $scope.incorrectLettersChosen = [];
     $scope.correctLettersChosen = [];
     $scope.displayWord = '';

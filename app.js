@@ -20,11 +20,10 @@ app.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationPro
 
 app.controller("gameController", ['$scope', '$timeout', '$location', ($scope, $timeout, $location) => {
 
-    var words = ["Metalica", "Beatles", "Queen", "Radiohead", "Aerosmith", "Scorpions", "Kiss", "Rush", "Eagles", "Oasis","Yes","Blur","Weezer","Cream","Journey"];
+    var words = ["Metalica", "Beatles", "Queen", "Radiohead", "Aerosmith", "Scorpions", "Kiss", "Rush", "Eagles", "Oasis", "Yes", "Blur", "Weezer", "Cream", "Journey"];
     $scope.incorrectLettersChosen = [];
     $scope.correctLettersChosen = [];
     $scope.displayWord = '';
-
     $scope.input = {
         letter: ''
     };
@@ -32,19 +31,23 @@ app.controller("gameController", ['$scope', '$timeout', '$location', ($scope, $t
     $scope.heart2 = true;
     $scope.heart3 = true;
 
-    var selectRandomWord = () => {
-        var index = Math.floor(Math.random() * words.length);
-        return words[index];
-    };
-    var newGame = () => {
+    var animate = () => {
         anime.timeline()
             .add({
-                targets: '.ml15 .word',
+                targets: '.animate .word',
                 scale: [14, 1],
                 opacity: [0, 1],
                 easing: "easeOutCirc",
                 duration: 600,
             });
+    }
+
+    var selectRandomWord = () => {
+        var index = Math.floor(Math.random() * words.length);
+        return words[index];
+    };
+    var newGame = () => {
+        animate();
         if ($scope.guitar1 == true || $scope.guitar2 == true) {
             $scope.result = true;
         }
@@ -88,23 +91,14 @@ app.controller("gameController", ['$scope', '$timeout', '$location', ($scope, $t
             $scope.guesses--;
             $scope.incorrectLettersChosen.push($scope.input.letter.toUpperCase());
         }
-
-
         $scope.input.letter = "";
+
         if ($scope.guesses == 0) {
             $timeout(() => {
-                $scope.result = true;
                 $scope.result = 'Too bad...';
                 $scope.displayWord = selectedWord
                 $scope.heart1 = false;
-                anime.timeline()
-                    .add({
-                        targets: '.ml15 .word',
-                        scale: [14, 1],
-                        opacity: [0, 1],
-                        easing: "easeOutCirc",
-                        duration: 600,
-                    });
+                animate();
             }, 500);
             $timeout(() => {
                 newGame();
@@ -113,27 +107,20 @@ app.controller("gameController", ['$scope', '$timeout', '$location', ($scope, $t
 
         if ($scope.guesses == 0 && $scope.heart1 == false) {
             $timeout(() => {
-                $scope.result = true;
                 $scope.result = 'Try harder..!';
                 $scope.displayWord = selectedWord
                 $scope.heart2 = false;
-                anime.timeline()
-                    .add({
-                        targets: '.ml15 .word',
-                        scale: [14, 1],
-                        opacity: [0, 1],
-                        easing: "easeOutCirc",
-                        duration: 600,
-                    });
+                animate();
             }, 500);
             $timeout(() => {
                 newGame();
             }, 2000);
         }
 
-        if ($scope.guesses == 0 && $scope.heart2 == false) {
+        if ($scope.guesses == 0 &&
+            $scope.heart2 == false &&
+            $scope.heart1 == false) {
             $timeout(() => {
-                $scope.result = true;
                 $scope.result = "You have lost..."
                 $scope.displayWord = selectedWord
                 $scope.heart3 = false;
@@ -147,57 +134,36 @@ app.controller("gameController", ['$scope', '$timeout', '$location', ($scope, $t
             $timeout(() => {
                 $scope.guitar1 = true;
                 $scope.result = "DAMN you're good!";
-                anime.timeline()
-                    .add({
-                        targets: '.ml15 .word',
-                        scale: [14, 1],
-                        opacity: [0, 1],
-                        easing: "easeOutCirc",
-                        duration: 600
-                    });
+                animate();
             }, 500);
             $timeout(() => {
                 newGame();
             }, 2000);
         }
 
-
-
-        if ($scope.displayWord.indexOf("*") == -1 && $scope.guitar1 == true) {
+        if ($scope.displayWord.indexOf("*") == -1 &&
+            $scope.guitar1 == true) {
             $timeout(() => {
                 $scope.guitar2 = true;
                 $scope.result = "You're almost there!!";
-                anime.timeline()
-                    .add({
-                        targets: '.ml15 .word',
-                        scale: [14, 1],
-                        opacity: [0, 1],
-                        easing: "easeOutCirc",
-                        duration: 600
-                    });
+                animate();
             }, 500);
             $timeout(() => {
                 newGame();
             }, 2000);
         }
 
-        if ($scope.displayWord.indexOf("*") == -1 && $scope.guitar2 == true) {
+        if ($scope.displayWord.indexOf("*") == -1 &&
+            $scope.guitar1 == true &&
+            $scope.guitar2 == true) {
             $timeout(() => {
-                $scope.result = true;
-                $scope.result = "Yea!@#$@#$@#";
                 $scope.guitar3 = true;
-                anime.timeline()
-                    .add({
-                        targets: '.ml15 .word',
-                        scale: [14, 1],
-                        opacity: [0, 1],
-                        easing: "easeOutCirc",
-                        duration: 600,
-                    });
+                $scope.result = "Yea!@#$@#$@#";
+                animate();
             }, 500);
             $timeout(() => {
                 $location.path('/win');
-            }, 2000);
+            }, 1500);
         }
     }
 
